@@ -1,0 +1,159 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:d="http://typo3.org/ns/DPN/Dmailsubscribe/ViewHelpers">
+
+<f:layout name="Form"/>
+
+<f:section name="Main">
+
+    <f:flashMessages/>
+
+    <f:form method="post" action="subscribe" name="subscription" object="{subscription}">
+        <f:if condition="{additionalFields.gender}">
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="gender">
+                        <f:translate key="label.gender"/>
+                        {f:if(condition: '{requiredFields.gender}', then: '*')}
+                    </label>
+                </div>
+                <div class="form-field">
+                    <f:form.select id="gender" property="gender" options="{m: '{f:translate(key: \'label.gender.male\')}', f: '{f:translate(key: \'label.gender.female\')}' }"/>
+                </div>
+            </div>
+        </f:if>
+
+        <f:if condition="{additionalFields.name}">
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="name">
+                        <f:translate key="label.name"/>
+                        {f:if(condition: '{requiredFields.name}', then: '*')}
+                    </label>
+                </div>
+                <div class="form-field">
+                    <f:form.textfield id="name" property="name"/>
+                </div>
+                <f:form.validationResults for="subscription.name">
+                    <f:for each="{validationResults.flattenedErrors}" as="error">
+                        <div class="form-error">{error.0.message}</div>
+                    </f:for>
+                </f:form.validationResults>
+            </div>
+        </f:if>
+
+        <f:if condition="{additionalFields.last_name}">
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="lastname">
+                        <f:translate key="label.lastName"/>
+                        {f:if(condition: '{requiredFields.last_name}', then: '*')}
+                    </label>
+                </div>
+                <div class="form-field">
+                    <f:form.textfield id="lastname" property="lastName"/>
+                </div>
+                <f:form.validationResults for="subscription.lastName">
+                    <f:for each="{validationResults.flattenedErrors}" as="error">
+                        <div class="form-error">{error.0.message}</div>
+                    </f:for>
+                </f:form.validationResults>
+            </div>
+        </f:if>
+
+        <f:if condition="{additionalFields.first_name}">
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="firstname">
+                        <f:translate key="label.firstName"/>
+                        {f:if(condition: '{requiredFields.first_name}', then: '*')}
+                    </label>
+                </div>
+                <div class="form-field">
+                    <f:form.textfield id="firstname" property="firstName"/>
+                </div>
+                <f:form.validationResults for="subscription.firstName">
+                    <f:for each="{validationResults.flattenedErrors}" as="error">
+                        <div class="form-error">{error.0.message}</div>
+                    </f:for>
+                </f:form.validationResults>
+            </div>
+        </f:if>
+
+        <f:if condition="{additionalFields.company}">
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="name">
+                        <f:translate key="label.company"/>
+                        {f:if(condition: '{requiredFields.company}', then: '*')}
+                    </label>
+                </div>
+                <div class="form-field">
+                    <f:form.textfield id="name" property="company"/>
+                </div>
+                <f:form.validationResults for="subscription.company">
+                    <f:for each="{validationResults.flattenedErrors}" as="error">
+                        <div class="form-error">{error.0.message}</div>
+                    </f:for>
+                </f:form.validationResults>
+            </div>
+        </f:if>
+
+        <div class="form-row">
+            <div class="form-label">
+                <label for="email">{f:translate(key: 'label.email')} *</label>
+            </div>
+            <div class="form-field">
+                <f:form.textfield id="email" property="email"/>
+            </div>
+            <f:form.validationResults for="subscription.email">
+                <f:for each="{validationResults.flattenedErrors}" as="error">
+                    <div class="error">{error.0.message}</div>
+                </f:for>
+            </f:form.validationResults>
+        </div>
+
+        <f:if condition="{additionalFields.receiveHtml}">
+            <div class="form-row">
+                <div class="form-label">
+                    <label for="receiveHtml">{f:translate(key: 'label.receiveHtml')}</label>
+                </div>
+                <div class="form-field">
+                    <f:form.checkbox id="receiveHtml" property="receiveHtml" value="1"
+                                     checked="{subscription.receiveHtml}"/>
+                </div>
+            </div>
+        </f:if>
+
+        <f:if condition="{additionalFields.categories}">
+            <f:if condition="{categories}">
+                <div class="form-row">
+                    <div class="form-label">
+                        <label>{f:translate(key: 'label.categories')}</label>
+                    </div>
+                    <div class="form-field">
+                        <f:for each="{categories}" as="category">
+                            <f:form.checkbox id="category_{category.uid}" name="categories[{category.uid}]"
+                                             value="{category.uid}" checked="{category.checked}"/>
+                            {category.title}
+                        </f:for>
+                    </div>
+                    <f:form.validationResults for="subscription.categories">
+                        <f:for each="{validationResults.flattenedErrors}" as="error">
+                            <div class="form-error">{error.0.message}</div>
+                        </f:for>
+                    </f:form.validationResults>
+                </div>
+            </f:if>
+        </f:if>
+
+        <f:form.submit name="submit" value="{f:translate(key: 'label.subscribe')}"/>
+
+        <p>
+            <f:link.action pageUid="{unsubscribePageUid}" action="unsubscribeform">
+                <f:translate key="label.unsubscribe"/>
+            </f:link.action>
+        </p>
+    </f:form>
+</f:section>
+</html>

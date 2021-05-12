@@ -1,0 +1,30 @@
+plugin.tx_dmailsubscribe {
+    view {
+        layoutRootPaths.0 = EXT:dmailsubscribe/Resources/Private/Layouts/
+        layoutRootPaths.10 = {$plugin.tx_dmailsubscribe.view.layoutRootPath}
+
+        templateRootPaths.0 = EXT:dmailsubscribe/Resources/Private/Templates/
+        templateRootPaths.10 = {$plugin.tx_dmailsubscribe.view.templateRootPath}
+
+        partialRootPaths.0 = EXT:dmailsubscribe/Resources/Private/Partials/
+        partialRootPaths.10 = {$plugin.tx_dmailsubscribe.view.partialRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_dmailsubscribe.persistence.storagePid}
+    }
+
+    settings {
+        additionalFields = {$plugin.tx_dmailsubscribe.settings.additionalFields}
+        requiredFields = {$plugin.tx_dmailsubscribe.settings.requiredFields}
+        muteConfirmationErrors = {$plugin.tx_dmailsubscribe.settings.muteConfirmationErrors}
+        muteUnsubscribeErrors = {$plugin.tx_dmailsubscribe.settings.muteUnsubscribeErrors}
+        lookupPids = {$plugin.tx_dmailsubscribe.settings.lookupPids}
+        categoryPids = {$plugin.tx_dmailsubscribe.settings.categoryPids}
+        fromEmail = {$plugin.tx_dmailsubscribe.settings.fromEmail}
+        fromName = {$plugin.tx_dmailsubscribe.settings.fromName}
+        subject = {$plugin.tx_dmailsubscribe.settings.subject}
+        pluginPageUid = {$plugin.tx_dmailsubscribe.settings.pluginPageUid}
+        unsubscribePageUid = {$plugin.tx_dmailsubscribe.settings.unsubscribePageUid}
+    }
+}
